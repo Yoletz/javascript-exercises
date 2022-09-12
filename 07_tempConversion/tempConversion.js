@@ -1,10 +1,7 @@
-const ftoc = function() {
+const ftoc = (val) => Math.round(((val - 32) * (5 / 9)) * 10) / 10;
 
-};
+const ctof = (val) => Math.round((val * (9 / 5) + 32) * 10) / 10;
 
-const ctof = function() {
-
-};
 
 // Do not edit below this line
 module.exports = {

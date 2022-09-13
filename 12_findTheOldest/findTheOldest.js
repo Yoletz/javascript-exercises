@@ -2,8 +2,10 @@ const findTheOldest = function(obj) {
   let getLarger = (n, m) =>
     n > m ? n : m;
   
+  let currentYear = (new Date()).getFullYear();
+
   let getAge = (person) => 
-    !person.yearOfDeath ? (new Date()).getFullYear() - person.yearOfBirth :
+    !person.yearOfDeath ? currentYear - person.yearOfBirth :
     person.yearOfDeath - person.yearOfBirth;
   
   let ageArr = obj.map(getAge);

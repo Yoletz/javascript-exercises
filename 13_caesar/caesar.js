@@ -1,6 +1,10 @@
 const caesar = function(str, num) {
+  const A_UPPER = 65;
+  const Z_UPPER = 90;
+  const A_LOWER = 97;
+  const Z_LOWER = 122;
 
-  function shiftChar(start, end, code, integer) {
+  function shiftCharCode(start, end, code, integer) {
     let shiftIter = (c, i) =>
       i == 0 ? c :
       c + i > end ? shiftIter(start, i - (end + 1 - c)) :
@@ -10,17 +14,19 @@ const caesar = function(str, num) {
     return shiftIter(code, integer);
   }
 
-  let shiftString = (index) =>
-    index == str.length ? "" :
-    str.charCodeAt(index) >= 65 && 
-    str.charCodeAt(index) <= 90 ? 
-      String.fromCharCode(shiftChar(65, 90, str.charCodeAt(index), num)) + 
-      shiftString(index + 1) :
-    str.charCodeAt(index) >= 97 &&
-    str.charCodeAt(index) <= 122 ? 
-      String.fromCharCode(shiftChar(97, 122, str.charCodeAt(index), num)) + 
-      shiftString(index + 1) :
-    str[index] + shiftString(index + 1);
+  function shiftString(index) {
+    let currentChar = str.charCodeAt(index);
+
+    return index == str.length ? "" : (
+      currentChar >= A_UPPER && 
+      currentChar <= Z_UPPER ? 
+        String.fromCharCode(shiftCharCode(A_UPPER, Z_UPPER, currentChar, num)) :
+      currentChar >= A_LOWER && 
+      currentChar <= Z_LOWER ? 
+        String.fromCharCode(shiftCharCode(A_LOWER, Z_LOWER, currentChar, num)) :
+      str[index]
+    ) + shiftString(index + 1);
+  }
 
   return shiftString(0);
 };

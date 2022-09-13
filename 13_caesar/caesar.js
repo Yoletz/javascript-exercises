@@ -6,7 +6,6 @@ const caesar = function(str, num) {
 
   function shiftCharCode(start, end, code, integer) {
     let shiftIter = (c, i) =>
-      i == 0 ? c :
       c + i > end ? shiftIter(start, i - (end + 1 - c)) :
       c + i < start ? shiftIter(end, i + (c - (start - 1))) :
       c + i;
